@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Rithikeswaran M",
+    "reg_no": "7376232IT239",
+    "dept": "IT",
+    "year": "II",
+    "mail": "rithikeswaran.it23@bitsathy.ac.in"
+  },
+  {
+    "id": 2,
+    "name": "Pushya M",
+    "reg_no": "7376232IT277",
+    "dept": "IT",
+    "year": "II",
+    "mail": "pushya.it23@bitsathy.ac.in"
+  }
+]
