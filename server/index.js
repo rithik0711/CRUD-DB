@@ -6,7 +6,7 @@ require("dotenv").config();
 const User = require("./models/User");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5050;
 
 // Middleware
 app.use(express.json());
@@ -22,10 +22,19 @@ app.use(
 );
 
 // MongoDB Connection
-mongoose
-  .connect(process.env.MONGO_URI)
+const mongoUri = process.env.MONGO_URI;
+if (!mongoUri || typeof mongoUri !== "string" || mongoUri.trim() === "") {
+  console.error("❌ Missing MONGO_URI in environment.");
+  process.exit(1);
+}
+
+mongoose.connect(mongoUri)
   .then(() => {
     console.log("✅ Connected to MongoDB Atlas");
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
   })
   .catch((err) => {
     console.error("❌ MongoDB connection failed:", err.message);
@@ -154,7 +163,4 @@ app.patch("/users/:id", async (req, res) => {
   }
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+
