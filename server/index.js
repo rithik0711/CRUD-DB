@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const path = require("path");
 require("dotenv").config();
 
 const User = require("./models/User");
@@ -10,6 +11,7 @@ const PORT = process.env.PORT || 5050;
 
 // Middleware
 app.use(express.json());
+app.use(express.static('public'));
 app.use(
   cors({
     origin: [
@@ -161,6 +163,11 @@ app.patch("/users/:id", async (req, res) => {
 
     res.status(500).json({ error: "Failed to update user" });
   }
+});
+
+// Serve React app for any unmatched routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 
