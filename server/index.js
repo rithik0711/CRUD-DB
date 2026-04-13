@@ -14,10 +14,7 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
-    ],
+    origin:"*",
     methods: ["GET", "POST", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type"],
   })
@@ -164,10 +161,10 @@ app.patch("/users/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to update user" });
   }
 });
-
-// Serve React app for any unmatched routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
 });
+// Serve React app for any unmatched routes
+
 
 

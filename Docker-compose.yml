@@ -1,0 +1,14 @@
+services:
+  backend:
+    build: ./server
+    ports:
+      - "5000:5050"
+    environment:
+      - MONGO_URI=mongodb+srv://rithik0711:rithik0711@cluster0.kfeurop.mongodb.net/crud-app
+
+  frontend:
+    build: ./client
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
