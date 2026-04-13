@@ -44,8 +44,9 @@ function App() {
     axios.get(`${API}/users`)
       .then(response => {
         console.log("Fetched Users:", response.data);
-        setUsers(response.data);
-        setFilteredUsers(response.data);
+	const data = Array.isArray(response.data) ? response.data : [];
+        setUsers(data);
+        setFilteredUsers(data);
         setIsLoading(false);
       })
       .catch(error => {
@@ -95,8 +96,8 @@ function App() {
 
   // Apply all filters and sorting
   const applyFiltersAndSort = (search, dept, year, sort) => {
-    let filtered = [...users];
-    
+    //let filtered = [...users];
+    let filtered = Array.isArray(users) ? [...users] : [];
     // Apply search filter
     if (search) {
       filtered = filtered.filter((user) =>
